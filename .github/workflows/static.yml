@@ -2,8 +2,7 @@ name: Deploy content to pages
 
 on:
   push:
-    branches: ["*"]
-
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
