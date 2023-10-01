@@ -28,9 +28,10 @@ jobs:
         with:
           python-version: 3.6.15
           cache: 'pip'
+          cache-dependency-path: 'dependencies.txt'
       - name: Install dependencies
         run: |
-          pip install --no-cache-dir -r dependencies.txt
+          pip install -r dependencies.txt
       - name: Build flask app
         run: |
           FLASK_APP=app.py flask freeze
