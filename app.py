@@ -6,7 +6,7 @@ from flask import Flask, render_template
 from flask_frozen import Freezer
 
 # Transforms routes to match GitHub Pages format
-# E.g. '/page' -> '/page/index.html' 
+# E.g. '/page' -> '/page.html' 
 class GH_Freezer(Freezer):
     def urlpath_to_filepath(self, path):
         if (not '.' in path.split('/')[-1]) and (not path.split('/')[0].endswith('.html') and (path != '/')):
