@@ -9,8 +9,10 @@ from flask_frozen import Freezer
 # E.g. '/page' -> '/page/index.html' 
 class GH_Freezer(Freezer):
     def urlpath_to_filepath(self, path):
-        if (not '.' in path.split('/')[-1]) and (not path.split('/')[0].endswith('.html')):
+        if (not '.' in path.split('/')[-1]) and (not path.split('/')[0].endswith('.html') and (path != '/')):
             path += '.html'
+        elif path == '/':
+            path += 'index.html'
         # Remove the initial slash that should always be there
         assert path.startswith('/')
         return path[1:]
