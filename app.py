@@ -10,7 +10,7 @@ from flask_frozen import Freezer
 class GH_Freezer(Freezer):
     def urlpath_to_filepath(self, path):
         if (not '.' in path.split('/')[-1]) and (not path.split('/')[0].endswith('.html')):
-            path += '/index.html'
+            path += '.html'
         # Remove the initial slash that should always be there
         assert path.startswith('/')
         return path[1:]
