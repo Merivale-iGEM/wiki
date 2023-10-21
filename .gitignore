@@ -1,9 +1,15 @@
-env/
-venv/
-.vscode
-__pycache__/
-public/
+env
+.env
 
-node_modules/
-static/static.css
+venv
+.venv
+
+.vscode
+!.vscode/launch.json
+
+__pycache__
+public
+
+node_modules
+static/compiled.css
 

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "This repository **MUST** contain all coding assets to generate your team's wiki (HTML, CSS, JavaScript, TypeScript, Python, etc).",
   "scripts": {
-    "dev": "tailwindcss -i ./static/base.css -o ./static/static.css --watch",
-    "build": "tailwindcss -i ./static/base.css -o ./static/static.css"
+    "dev": "tailwindcss -i ./static/base.css -o ./static/compiled.css --watch",
+    "build": "tailwindcss -i ./static/base.css -o ./static/compiled.css"
   },
   "author": "",
   "license": "MIT",
