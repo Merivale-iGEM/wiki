@@ -1,15 +1,16 @@
-env
+env/
+.env/
 .env
 
-venv
-.venv
+venv/
+.venv/
 
-.vscode
+.vscode/
 !.vscode/launch.json
 
-__pycache__
-public
+__pycache__/
+public/
 
-node_modules
+node_modules/
 static/compiled.css
 
