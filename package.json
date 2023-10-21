@@ -1,13 +1,13 @@
 {
   "name": "wiki",
   "version": "1.0.0",
-  "description": "This repository **MUST** contain all coding assets to generate your team's wiki (HTML, CSS, JavaScript, TypeScript, Python, etc).",
+  "description": "The wiki page for the Merivale iGEM team",
   "scripts": {
     "dev": "tailwindcss -i ./static/base.css -o ./static/build.css --watch",
     "build": "tailwindcss -i ./static/base.css -o ./static/build.css"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "Merivale iGEM",
+  "license": "CC-BY-4.0",
   "devDependencies": {
     "tailwindcss": "^3.3.3"
   }
