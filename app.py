@@ -21,7 +21,7 @@ template_folder = path.abspath('./wiki')
 
 app = Flask(__name__, template_folder=template_folder)
 #app.config['FREEZER_BASE_URL'] = environ.get('CI_PAGES_URL')
-app.config['FREEZER_DESTINATION'] = 'public'
+app.config['FREEZER_DESTINATION'] = 'build'
 app.config['FREEZER_RELATIVE_URLS'] = True
 app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 app.config['FREEZER_DEFAULT_MIMETYPE'] = 'text/html'

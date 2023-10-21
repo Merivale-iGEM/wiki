@@ -9,8 +9,8 @@ venv/
 !.vscode/launch.json
 
 __pycache__/
-public/
+
+build/
 
 node_modules/
-static/compiled.css
-
+static/build.css
