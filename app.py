@@ -25,11 +25,11 @@ class GH_Freezer(Freezer):
         assert path.startswith("/")
         return path[1:]
 
-    def _build_one(self, url, last_modified=None):
-        if url[1 : len(self.repo_name) + 1] == self.repo_name:
-            url = url[len(self.repo_name) + 1 :]
-            print(url)
-        return super()._build_one(url, last_modified)
+    # def _build_one(self, url, last_modified=None):
+    #     if url[1 : len(self.repo_name) + 1] == self.repo_name:
+    #         url = url[len(self.repo_name) + 1 :]
+    #         print(url)
+    #     return super()._build_one(url, last_modified)
 
 
 # Cheap hack to make static files work on GitHub Pages
@@ -45,8 +45,8 @@ class GH_Flask(Flask):
         **values: t.Any,
     ) -> str:
         url = super().url_for(endpoint, **values)
-        if endpoint == "static":
-            url = "/" + self.repo_name + url
+        # if endpoint == "static":
+        #    url = "/" + self.repo_name + url
         return url
 
 
