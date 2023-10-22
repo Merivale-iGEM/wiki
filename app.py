@@ -24,7 +24,6 @@ class GH_Freezer(Freezer):
 
 template_folder = path.abspath("./wiki")
 static_folder = path.abspath("./static")
-
 app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
 # app.config['FREEZER_BASE_URL'] = environ.get('CI_PAGES_URL')
 app.config["FREEZER_DESTINATION"] = "build"
@@ -33,6 +32,20 @@ app.config["FREEZER_IGNORE_MIMETYPE_WARNINGS"] = True
 app.config["FREEZER_DEFAULT_MIMETYPE"] = "text/html"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 if "GITHUB_WORKFLOW" in os.environ:
+    static_url_path = "/" + os.environ["GITHUB_REPOSITORY"].split("/")[1] + "/static"
+    app.static_url_path = static_url_path
+
+    for rule in app.url_map.iter_rules("static"):
+        app.url_map._rules.remove(rule)
+
+    app.url_map._rules_by_endpoint["static"] = []
+
+    app.add_url_rule(
+        f"{static_url_path}/<path:filename>",
+        endpoint="static",
+        view_func=app.send_static_file,
+    )
+
     freezer = GH_Freezer(app)
 else:
     freezer = Freezer(app)
