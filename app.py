@@ -10,6 +10,10 @@ from flask_frozen import Freezer
 # Cheap hack to match GitHub Pages format
 # E.g. '/page' -> '/page.html'
 class GH_Freezer(Freezer):
+    def __init__(self, *args, **kwargs):
+        self.repo_name = os.environ["GITHUB_REPOSITORY"].split("/")[1]
+        super().__init__(*args, **kwargs)
+
     def urlpath_to_filepath(self, path):
         if (not "." in path.split("/")[-1]) and (
             not path.split("/")[0].endswith(".html") and (path != "/")
@@ -21,10 +25,19 @@ class GH_Freezer(Freezer):
         assert path.startswith("/")
         return path[1:]
 
+    def _build_one(self, url, last_modified=None):
+        if url[1 : len(self.repo_name) + 1] == self.repo_name:
+            url = url[len(self.repo_name) + 1 :]
+        return super()._build_one(url, last_modified)
+
 
 # Cheap hack to make static files work on GitHub Pages
 # Prefixes all static file URLs with the repo name
 class GH_Flask(Flask):
+    def __init__(self, *args, **kwargs):
+        self.repo_name = os.environ["GITHUB_REPOSITORY"].split("/")[1]
+        super().__init__(*args, **kwargs)
+
     def url_for(
         self,
         endpoint: str,
@@ -32,7 +45,7 @@ class GH_Flask(Flask):
     ) -> str:
         url = super().url_for(endpoint, **values)
         if endpoint == "static":
-            url = "/" + os.environ["GITHUB_REPOSITORY"].split("/")[1] + url
+            url = "/" + self.repo_name + url
         return url
 
 
