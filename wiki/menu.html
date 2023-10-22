@@ -1,76 +1,207 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-
-    <!---- TEAM NAME ---->
-    <a class="navbar-brand" href="#">Example</a>
-
-    <!---- SMALL SCREEN MENU ICON ---->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto left-aligned">
-
-        <!---- HOME ---->
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+<nav class="flex fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-lg">
+  <div class="max-w-8xl px-20 py-6 flex flex-row grow mx-auto">
+    <!-- Branding -->
+    <div class="text-orange flex flex-row space-x-6">
+      <div class="my-auto">
+        <img src="/static/logo.png" alt="Merivale iGEM Logo" class="h-16" />
+      </div>
+      <div class="space-y-1 my-auto">
+        <p class="font-montserrat font-bold text-2xl">Merivale iGEM</p>
+        <p class="font-lato font-bold text-sm tracking-[0.05rem]">
+          Innovating for Success
+        </p>
+      </div>
+    </div>
+    <!-- Nav Content-->
+    <div class="ml-auto my-auto font-lato font-medium text-white">
+      <ul class="flex flex-row">
+        <!-- Home -->
+        <li class="px-2">
+          <a href="{{ url_for('home') }}" class="hover:text-gray-300">Home</a>
         </li>
 
-        <!---- TEAM ---->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{{ url_for('pages', page='team') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Team
+        <!-- Team -->
+        <li
+          x-data="{ open: false }"
+          class="relative px-2"
+          @click.outside="open = false"
+        >
+          <a
+            href="{{ url_for('pages', page='team') }}"
+            @click.prevent="open =! open"
+            class="hover:text-gray-300"
+          >
+            <p class="inline">Team</p>
+            <svg
+              class="-mr-1 h-5 w-5 inline"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='team') }}">Team</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='attributions') }}">Attributions</a></li>
+          <ul
+            :class="{ 'hidden': ! open }"
+            class="hidden absolute py-2 bg-white text-black min-w-[10rem] left-0 mt-3 border-2 border-gray-200/50 rounded-md shadow-lg overflow-hidden"
+          >
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='team') }}">Team</a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='attributions') }}">
+                Attributions
+              </a>
+            </li>
           </ul>
         </li>
 
-        <!---- PROJECT ---->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Project
+        <!-- Project -->
+        <li
+          x-data="{ open: false }"
+          class="relative px-2"
+          @click.outside="open = false"
+        >
+          <a
+            href="{{ url_for('pages', page='project') }}"
+            @click.prevent="open =! open"
+            class="hover:text-gray-300"
+          >
+            <p class="inline">Project</p>
+            <svg
+              class="-mr-1 h-5 w-5 inline"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='contribution') }}">Contribution</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='description') }}">Description</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='engineering') }}">Engineering</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='experiments') }}">Experiments</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='notebook') }}">Notebook</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='results') }}">Results</a></li>
+          <ul
+            :class="{ 'hidden': ! open }"
+            class="absolute py-2 bg-white text-black min-w-[10rem] left-0 mt-3 border-2 border-gray-200/50 rounded-md shadow-lg overflow-hidden"
+          >
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='contribution') }}">
+                Contribution
+              </a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='description') }}">
+                Description
+              </a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='engineering') }}">
+                Engineering
+              </a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='experiments') }}">
+                Experiments
+              </a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='notebook') }}"> Notebook </a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='results') }}"> Results </a>
+            </li>
           </ul>
         </li>
 
-        <!---- SAFETY ---->
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('pages', page='safety') }}">Safety</a>
+        <!-- Safety -->
+        <li class="px-2">
+          <a
+            href="{{ url_for('pages', page='safety') }}"
+            class="hover:text-gray-300"
+            >Safety</a
+          >
         </li>
 
-        <!---- HUMAN PRACTICES ---->
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('pages', page='human-practices') }}">Human Practices</a>
+        <!-- Human Practices -->
+        <li class="px-2">
+          <a
+            href="{{ url_for('pages', page='human-practices') }}"
+            class="hover:text-gray-300"
+            >Human Practices</a
+          >
         </li>
 
-        <!---- AWARDS ---->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Awards
+        <!--Awards-->
+        <li
+          x-data="{ open: false }"
+          class="relative px-2"
+          @click.outside="open = false"
+        >
+          <a
+            href="{{ url_for('pages', page='awards') }}"
+            @click.prevent="open =! open"
+            class="hover:text-gray-300"
+          >
+            <p class="inline">Awards</p>
+            <svg
+              class="-mr-1 h-5 w-5 inline"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='education') }}">Education</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='entrepreneurship') }}">Entrepreneurship</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='hardware') }}">Hardware</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='inclusivity') }}">Inclusivity</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='measurement') }}">Measurement</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='model') }}">Model</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='plant') }}">Plant</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='software') }}">Software</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('pages', page='sustainable') }}">Sustainable</a></li>
+          <ul
+            :class="{ 'hidden': ! open }"
+            class="absolute py-2 bg-white text-black min-w-[10rem] left-0 mt-3 border-2 border-gray-200/50 rounded-md shadow-lg overflow-hidden"
+          >
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='education') }}">Education</a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='entrepreneurship') }}"
+                >Entrepreneurship</a
+              >
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='hardware') }}">Hardware</a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='inclusivity') }}"
+                >Inclusivity</a
+              >
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='measurement') }}"
+                >Measurement</a
+              >
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='model') }}">Model</a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='plant') }}">Plant</a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='software') }}">Software</a>
+            </li>
+            <li class="px-4 hover:bg-gray-200 py-1.5">
+              <a href="{{ url_for('pages', page='sustainable') }}"
+                >Sustainable</a
+              >
+            </li>
           </ul>
         </li>
-
       </ul>
     </div>
   </div>

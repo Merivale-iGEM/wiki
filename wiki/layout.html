@@ -1,41 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"/>
-    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"
+    />
+    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
 
-    <!-- Bootstrap CSS -->
-    <link href="{{ url_for('static', filename = 'build.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-    <title>{% block title %}{% endblock %} | Example - iGEM 2023</title>
+    <!-- Compiled CSS (TailwindCSS) -->
+    <link
+      href="{{ url_for('static', filename = 'build.css') }}"
+      rel="stylesheet"
+    />
 
-</head>
-<body>
-  <!-- Navigation -->
-  {% include 'menu.html' %}
+    <!-- JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
 
-  <!-- Header -->
-  <header class="py-5 mb-5 bg-hero">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <div class="col-lg-12">
-          <h1 class="mt-5 mb-2 text-white display-4">{{ self.title() }}</h1>
-	        <p class="mb-5 lead text-white-50">{% block lead %}{% endblock %}</p>
+    <title>{% block title %}{% endblock %} | Merivale iGEM 2023</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    {% include 'menu.html' %}
+
+    <!-- Header -->
+    {% if show_header %}
+    <header>
+      <div>
+        <div>
+          <div>
+            <h1>{{ self.title() }}</h1>
+            <p>{% block lead %}{% endblock %}</p>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
+    {% endif %}
 
-  <!-- Page Content -->
-  <div class="container">
-    {% block page_content %}{% endblock %}
-  </div>
+    <!-- Page Content -->
+    <main>{% block page_content %}{% endblock %}</main>
 
-  <!-- Footer: MUST mention license AND have a link to team wiki's repository on gitlab.igem.org -->
-  {% include 'footer.html' %}
-
-</body>
+    <!-- Footer: MUST mention license AND have a link to team wiki's repository on gitlab.igem.org -->
+    {% include 'footer.html' %}
+  </body>
 </html>
