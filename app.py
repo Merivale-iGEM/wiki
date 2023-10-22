@@ -2,12 +2,39 @@ import os
 from os import path
 from pathlib import Path
 import typing as t
+import flask_frozen
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
+import posixpath
+from posixpath import relpath as posix_relpath
 from flask_frozen import Freezer
 
 
-# Cheap hack to match GitHub Pages format
+# Monkey patch to use the correct index url
+def gh_relative_url_for(endpoint, **values):
+    url = url_for(endpoint, **values)
+
+    # absolute URLs in http://... (with subdomains or _external=True)
+    if not url.startswith("/"):
+        return url
+
+    url, fragment_sep, fragment = url.partition("#")
+    url, query_sep, query = url.partition("?")
+    # if url.endswith('/'):
+    #     url += 'index.html'
+    url += query_sep + query + fragment_sep + fragment
+
+    request_path = request.path
+    if not request_path.endswith("/"):
+        request_path = posixpath.dirname(request_path)
+
+    return posix_relpath(url, request_path)
+
+
+flask_frozen.relative_url_for = gh_relative_url_for
+
+
+# Monkey patch to match GitHub Pages format
 # E.g. '/page' -> '/page.html'
 class GH_Freezer(Freezer):
     def __init__(self, *args, **kwargs):
@@ -24,38 +51,10 @@ class GH_Freezer(Freezer):
         assert path.startswith("/")
         return path[1:]
 
-    def _build_one(self, url, last_modified=None):
-        if url == "/":
-            url += "index.html"
-        return super()._build_one(url, last_modified)
-
-
-# Cheap hack to make static files work on GitHub Pages
-# Prefixes all static file URLs with the repo name
-class GH_Flask(Flask):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def url_for(
-        self,
-        endpoint: str,
-        **values: t.Any,
-    ) -> str:
-        url = super().url_for(endpoint, **values)
-        if url == "/index.html":
-            return "/"
-        return url
-
 
 template_folder = path.abspath("./wiki")
 static_folder = path.abspath("./static")
-app = None
-if "GITHUB_WORKFLOW" in os.environ:
-    app = GH_Flask(
-        __name__, template_folder=template_folder, static_folder=static_folder
-    )
-else:
-    app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
+app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
 
 # app.config['FREEZER_BASE_URL'] = environ.get('CI_PAGES_URL')
 app.config["FREEZER_DESTINATION"] = "build"
@@ -64,6 +63,7 @@ app.config["FREEZER_IGNORE_MIMETYPE_WARNINGS"] = True
 app.config["FREEZER_DEFAULT_MIMETYPE"] = "text/html"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 if "GITHUB_WORKFLOW" in os.environ:
+    flask_frozen.relative_url_for = gh_relative_url_for
     freezer = GH_Freezer(app)
 else:
     freezer = Freezer(app)
@@ -93,4 +93,5 @@ def pages(page):
 
 # Main Function, Runs at http://0.0.0.0:8080
 if __name__ == "__main__":
-    app.run(port=8080, debug=True)
+    freezer.freeze()
+    # app.run(port=8080, debug=True)
