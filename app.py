@@ -32,7 +32,7 @@ class GH_Flask(Flask):
     ) -> str:
         url = super().url_for(endpoint, **values)
         if endpoint == "static":
-            url = os.environ["GITHUB_REPOSITORY"].split("/")[1] + url
+            url = "/" + os.environ["GITHUB_REPOSITORY"].split("/")[1] + url
         return url
 
 
