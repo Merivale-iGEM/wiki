@@ -39,6 +39,7 @@ if "GITHUB_WORKFLOW" in os.environ:
         app.url_map._rules.remove(rule)
 
     app.url_map._rules_by_endpoint["static"] = []
+    app.view_functions["static"] = None
 
     app.add_url_rule(
         f"{static_url_path}/<path:filename>",
