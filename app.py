@@ -31,9 +31,6 @@ def gh_relative_url_for(endpoint, **values):
     return posix_relpath(url, request_path)
 
 
-flask_frozen.relative_url_for = gh_relative_url_for
-
-
 # Monkey patch to match GitHub Pages format
 # E.g. '/page' -> '/page.html'
 class GH_Freezer(Freezer):
