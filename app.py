@@ -28,6 +28,7 @@ class GH_Freezer(Freezer):
     def _build_one(self, url, last_modified=None):
         if url[1 : len(self.repo_name) + 1] == self.repo_name:
             url = url[len(self.repo_name) + 1 :]
+            print(url)
         return super()._build_one(url, last_modified)
 
 
