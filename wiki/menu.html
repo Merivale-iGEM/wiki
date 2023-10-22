@@ -3,7 +3,11 @@
     <!-- Branding -->
     <div class="text-orange flex flex-row space-x-6">
       <div class="my-auto">
-        <img src="/static/logo.png" alt="Merivale iGEM Logo" class="h-16" />
+        <img
+          src="{{ url_for('static', filename = 'logo.png') }}"
+          alt="Merivale iGEM Logo"
+          class="h-16"
+        />
       </div>
       <div class="space-y-1 my-auto">
         <p class="font-montserrat font-bold text-2xl">Merivale iGEM</p>
