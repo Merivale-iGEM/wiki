@@ -1,13 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="shortcut icon"
-      href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"
-    />
+    <link rel="shortcut icon" href="/static/logo-primary.svg" />
     <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
 
     <!-- Compiled CSS (TailwindCSS) -->
@@ -30,16 +27,16 @@
 
     <!-- Header -->
     {% if show_header %}
-    <header>
-      <div>
+      <header>
         <div>
           <div>
-            <h1>{{ self.title() }}</h1>
-            <p>{% block lead %}{% endblock %}</p>
+            <div>
+              <h1>{{ self.title() }}</h1>
+              <p>{% block lead %}{% endblock %}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
     {% endif %}
 
     <!-- Page Content -->
