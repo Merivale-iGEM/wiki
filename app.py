@@ -8,6 +8,7 @@ from flask import Flask, render_template, request, url_for
 import posixpath
 from posixpath import relpath as posix_relpath
 from flask_frozen import Freezer
+from livereload import Server
 
 
 # Monkey patch to use the correct index url
@@ -90,4 +91,7 @@ def pages(page):
 
 # Main Function, Runs at http://0.0.0.0:8080
 if __name__ == "__main__":
-    app.run(port=8080, debug=True)
+    app.debug = True
+    server = Server(app.wsgi_app)
+    server.watch("./wiki/**/*.*")
+    server.serve(port=8080)
