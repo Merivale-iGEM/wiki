@@ -1,21 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./wiki/**/*.html', './app.py'],
+  content: ["./wiki/**/*.html", "./app.py"],
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif' ],
-        lato: ['Lato', 'sans-serif']
+        baron: ["Baron Neue", "sans-serif"],
+        spartan: ["League Spartan", "sans-serif"],
       },
       colors: {
-        "orange": "#ff9f00",
-        "dark-blue": "#003153"
+        primary: "#ff5757",
+        bg: "#efefef",
+        accent1: "#6d6d6d",
+        accent2: "#242424",
       },
       maxWidth: {
-        "8xl": "88rem" 
-      }
+        "8xl": "88rem",
+      },
     },
   },
   plugins: [],
-}
-
+};
