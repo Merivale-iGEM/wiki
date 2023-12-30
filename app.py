@@ -1,7 +1,6 @@
 import os
 from os import path
 from pathlib import Path
-import typing as t
 import flask_frozen
 
 from flask import Flask, render_template, request, url_for
