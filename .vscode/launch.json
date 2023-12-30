@@ -1,38 +1,36 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "2.0.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "TailwindCSS",
-            "cwd": "${workspaceRoot}",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "run",
-                "dev"
-            ],
-            "presentation": {
-                "hidden": true
-            },
-        },
-        {
-            "type": "python",
-            "request": "launch",
-            "program": "app.py",
-            "name": "Flask App",
-            "presentation": {
-                "hidden": true
-            }
-        }
-    ],
-    "compounds": [
-        {
-            "name": "Dev Server",
-            "configurations": ["TailwindCSS", "Flask App"],
-            "stopAll": true
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "2.0.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "TailwindCSS",
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "type": "python",
+      "request": "launch",
+      "program": "app.py",
+      "name": "Flask App",
+      "console": "internalConsole",
+      "presentation": {
+        "hidden": false
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Dev Server",
+      "configurations": ["TailwindCSS", "Flask App"],
+      "stopAll": true
+    }
+  ]
 }

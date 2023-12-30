@@ -93,5 +93,4 @@ def pages(page):
 if __name__ == "__main__":
     app.debug = True
     server = Server(app.wsgi_app)
-    server.watch("./wiki/**/*.*")
-    server.serve(port=8080)
+    server.serve(port=8080, live_css=False, restart_delay=250)
